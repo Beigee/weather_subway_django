@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <style> /*Delete Place-btn*/
+    .button {
+  background: #3D4C53;
+  margin-top : 7px;
+  margin-left: 5%;
+  width : 90%;
+  height : 30px;
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+}
+.btnTwo {
+  position : relative;
+  width : 200px;
+  height : 100px;
+  margin-top: -100px;
+  padding-top: 2px;
+  background : red;
+  left : -250px;
+  transition : .3s;
+}
+.btnText {
+  color : white;
+  transition : .3s;
+}
+.btnText2 {
+  margin-top : 63px;
+  margin-right : -130px;
+  color : #FFF;
+  font-weight: 500;
+}
+.button:hover .btnTwo{ /*When hovering over .button change .btnTwo*/
+  left: -130px;
+}
+.button:hover .btnText{ /*When hovering over .button change .btnText*/
+  margin-left : 65px;
+}
+.button:active { /*Clicked and held*/
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
+}
+
+    /*addmore-btn*/
+.center {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+a span {
+    padding: 15px;
+    transition: .5s;
+    position: relative;
+}
+a span:nth-child(1) {
+    color: #fff;
+    background: #11bbad;
+}
+a span:nth-child(2) {
+    color: #fff;
+    background: #ff3636;
+}
+a span:nth-child(1):before {
+    content: attr(data-attr);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ff3636;
+    padding: 15px;
+    transition: 0.5S;
+    transform-origin: top;
+    transform: rotateX(90deg) translateY(-50%);
+}
+a:hover span:nth-child(1):before {
+    transform: rotateX(0deg) translateY(0%);
+}
+a span:nth-child(2):before {
+    content: attr(data-attr);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #11bbad;
+    padding: 15px;
+    transition: 0.5S;
+    transform-origin: bottom;
+    transform: rotateX(90deg) translateY(50%);
+}
+a:hover span:nth-child(2):before {
+    transform: rotateX(0deg) translateY(0%);
+}
+a  span:nth-child(1):after {
+  content: attr(data-attr);
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #11bbad;
+  transform-origin: bottom;
+  transform: rotateX(0deg) translateY(0%);
+  transition: 0.5s;
+}
+a:hover span:nth-child(1):after {
+  transform: rotateX(90deg) translateY(50%);
+}
+a span:nth-child(2):after {
+    content: attr(data-attr);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ff3636;
+    padding: 15px;
+    transition: 0.5S;
+    transform-origin: top;
+    transform: rotateX(0deg) translateY(0%);
+}
+a:hover span:nth-child(2):after {
+    transform: rotateX(90deg) translateY(-50%);
+}
+
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="#">
+          <i class="fa d-inline fa-lg fa-circle"></i>
+          <b> BRAND</b>
+        </a>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"> <a class="nav-link" href="#" style="font-size: 15px"><b>__</b></a> </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item"> <a class="nav-link" href="home">Home</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="login">Log in</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-3" >My Place</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active"><b>관악구 서울대입구역</b></a>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                </div>
+                <div class="col-md-12">
+                  <div id="holder">
+                    <div class="button">
+                      <p class="btnText">Delete Place</p>
+                      <div class="btnTwo">
+                        <p class="btnText2">X</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active"><b>관악구 낙성대역</b></a>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                </div>
+                <div class="col-md-12">
+                  <div id="holder">
+                    <div class="button">
+                      <p class="btnText">Delete Place</p>
+                      <div class="btnTwo">
+                        <p class="btnText2">X</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action active"><b>마포구 망원역</b></a>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+                </div>
+                <div class="col-md-12">
+                  <div id="holder">
+                    <div class="button">
+                      <p class="btnText">Delete Place</p>
+                      <div class="btnTwo">
+                        <p class="btnText2">X</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" style="">
+          <div class="col-md-12">
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active"><b>관악구 봉천역</b></a>
+              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
+            </div>
+            <div class="col-md-12">
+              <div id="holder">
+                <div class="button">
+                  <p class="btnText">Delete Place</p>
+                  <div class="btnTwo">
+                    <p class="btnText2">X</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" style="">
+          <div class="center"><a href="home"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size:30px; text-transform: uppercase"></span></a>
+          </div>
+        </div>
+        <div class="col-md-4" style=""></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
+
+</html>
