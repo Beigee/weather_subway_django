@@ -1,0 +1,34 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>django</title>
+    <link rel="stylesheet" type="text/css" href="{% static
+    "rest_framework/css/prettify.css" %}"/> <link rel="stylesheet"
+    type="text/css" href="{% static "rest_framework/css/default.css" %}"/> <link
+    rel="stylesheet" type="text/css" href="{% static
+    "rest_framework/css/bootstrap.min.css" %}"/> <link rel="stylesheet"
+    type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css"
+    %}"/>
+  </head>
+  <body>
+    <ol class="breadcrumb">
+      <li><a href="#">DE</a></li>
+      {% if user.is_authenticated %}
+      <li>
+        <a class="nav-link" href="{% url 'accounts:logout' %}"
+          >{{user.username}} | logout</a
+        >
+      </li>
+      {% else %}
+      <li>
+        <a class="nav-link" href="{% url 'accounts:log_in' %}">login</a>
+      </li>
+      <li>
+        <a class="nav-link" href="{% url 'accounts:sign_up' %}">signup</a>
+      </li>
+    </ol>
+    {% block content %} {% endblock %}
+  </body>
+</html> -->

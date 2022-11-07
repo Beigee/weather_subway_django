@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.btn-group {
+  scroll-behavior: smooth;
+  margin: auto;
+  text-align: center;
+  width: 250px;
+  height: 40px;
+}
+
+.title_button1 {
+  scroll-behavior: smooth;
+}
+
+.menu {
+  text-align: right;
+}
+
+.menu a {
+  background-color: turquoise;
+  color: White;
+  padding: 1px 5px;
+  border-radius: 30px;
+}
+
+.button_bottom {
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* "btn-group" 는 클릭하는 곳 = scroll container*/

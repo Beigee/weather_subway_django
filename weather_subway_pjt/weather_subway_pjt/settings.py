@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts",
     "options",
-    "service",
+    "myservice",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "weather_subway_pjt.urls"
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIR = [os.path.join(BASE_DIR, 'static'),]
 
 TEMPLATES = [
     {
