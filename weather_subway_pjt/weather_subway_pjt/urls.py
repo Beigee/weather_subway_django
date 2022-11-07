@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.index, name='main'),
     path('accounts/', include('accounts.urls')),
+    path('myservice/',include('myservice.urls'))
 ]
