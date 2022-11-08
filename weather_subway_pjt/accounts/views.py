@@ -16,7 +16,7 @@ def signup(request):
             return redirect('/')
     else:
         form = UserForm()
-    return render(request, 'templates/sign_up.html', {'form': form})
+    return render(request, 'accounts/sign_up.html', {'form': form})
 
 # def login(request):
 #     if request.method == 'POST':
