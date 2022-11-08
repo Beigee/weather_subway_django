@@ -14,14 +14,14 @@ from pathlib import Path
 import os
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'finalproject_high',
-        'USER': 'db_final',
-        'PASSWORD': '123QWE!@#qwe',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.oracle',
+#         'NAME': 'finalproject_high',
+#         'USER': 'db_final',
+#         'PASSWORD': '123QWE!@#qwe',
+#     }
+# }
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
