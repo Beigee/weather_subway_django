@@ -1,3 +1,7 @@
+
+
+
+
 import pandas as pd
 import numpy as np
 import warnings
@@ -12,7 +16,7 @@ from datetime import datetime
 # 넘어온 정보를 가중치와 병합, 길이를 맞춤
 def pre_predict(wea,gu):
     weather = pd.DataFrame()
-    station_W = pd.read_csv('./dummie_data/station_W.csv')
+    station_W = pd.read_csv('options/dummie_data/station_W.csv')
 
     W = station_W[station_W['GU'] == gu].set_index('STATION_NAME',drop=False)[['W']]
     wea = pd.DataFrame(wea)
@@ -28,7 +32,7 @@ def pre_predict(wea,gu):
 
 # 웹서버에 모델 저장해놓기(csv와 경로 똑같이)
 def predict(values):
-    lr = joblib.load('./dummie_data/weather_lr.pkl')
+    lr = joblib.load('options/dummie_data/weather_lr.pkl')
     result = lr.predict(values)
     result = pd.DataFrame(np.expm1(result))
     result.index = values.index
@@ -43,7 +47,7 @@ def weather_import(day,time,gu):
 # 3일치를 모두 csv파일로 저장
 # csv 로드 후 day가 key
 # 1. csv 로드 3일치 예보
-    wea = pd.read_csv('./dummie_data/forecast.csv')# 1. csv 로드 3일치 예보
+    wea = pd.read_csv('options/dummie_data/forecast.csv')# 1. csv 로드 3일치 예보
 # 2. 로드된 df에서 오늘/내일/모레 & 시간를 인덱싱 후 가져오기
     # wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'PM10', 'PM25', 'DAY', 'TIME']] # 컬럼 순서에 맞게 정렬
     wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'DAY', 'TIME']]
@@ -65,6 +69,7 @@ def weather_import(day,time,gu):
 
 
 # (py파일, 모델파일, 날씨.csv, station_W.csv 같은 폴더에)
-weather,result = weather_import('day1', '13', '종로구')
-print(result)
-print(weather)
+# weather,result = weather_import('day1', '13', '종로구')
+# print(result)
+# print(weather)
+
