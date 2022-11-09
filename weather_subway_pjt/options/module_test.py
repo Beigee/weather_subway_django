@@ -44,23 +44,27 @@ def weather_import(day,time,gu):
 # 1. csv 로드 3일치 예보
     wea = pd.read_csv('options/dummie_data/forecast.csv')# 1. csv 로드 3일치 예보
 # 2. 로드된 df에서 오늘/내일/모레 & 시간를 인덱싱 후 가져오기
-    # wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'PM10', 'PM25', 'DAY', 'TIME']] # 컬럼 순서에 맞게 정렬
-    wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'DAY', 'TIME']]
+    wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'PM10', 'PM25', 'DAY', 'TIME']] # 컬럼 순서에 맞게 정렬
+    # wea = wea[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'DAY', 'TIME']]
     T=[0 if (int(i.split(':')[0])>19)|(int(i.split(':')[0])<17) else 1 for i in wea['TIME']] # 시간대 컬럼 생성
     wea['TIME'] = pd.to_datetime(wea['TIME']) # 시간정보를 문자열에서 시간변수로 변환
     wea['time'] = wea['TIME'].dt.strftime('%H').astype(int)# 변환된 시간변수로 시간컬럼 생성
 
-    wea.drop(['DAY', 'TIME'],axis=1, inplace=True)# 불필요 컬럼 제거
-    wea['PM10'] = [32.8]*39 # 미세먼지 컬럼 (임시)
-    wea['PM25'] = [19.2]*39 # 초미세먼지 컬럼 (임시)
+
+    # wea['PM10'] = [32.8]*39 # 미세먼지 컬럼 (임시)
+    # wea['PM25'] = [19.2]*39 # 초미세먼지 컬럼 (임시)
     wea['T'] = T # 시간대 컬럼 삽입
     wea = {'today':wea[:13], 'day1':wea[13:26],'day2':wea[26:]} # 3일치에 맞게 컬럼 분할
     weather = wea[day][wea[day]['time'] == int(time)] # 요청받은 날짜, 시간에 맞는 예보데이터 인덱싱
+    date = weather['DAY']
+
+
     weather = weather[['RAIN', 'HUMN', 'SNOW', 'SKY', 'ONDO', 'WINDD', 'WINDS', 'PM10', 'PM25','T']]
     # weather.drop('time', axis=1, inplace=True) # 인덱싱을 위한 시간변수 삭제
 # 3. 예측
     result = predict(pre_predict(weather,gu)).round(0)
-    return weather, result
+    result.index=result.index+1
+    return weather, result, date
 
 
 # (py파일, 모델파일, 날씨.csv, station_W.csv 같은 폴더에)
