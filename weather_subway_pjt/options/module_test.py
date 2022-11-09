@@ -63,6 +63,11 @@ def weather_import(day,time,gu):
     # weather.drop('time', axis=1, inplace=True) # 인덱싱을 위한 시간변수 삭제
 # 3. 예측
     result = predict(pre_predict(weather,gu)).round(0)
+    station_W = pd.read_csv('options/dummie_data/station_W.csv', encoding='cp949')
+    dumm = station_W.set_index('STATION_NAME')
+    result.set_index('STATION_NAME',inplace=True)
+    LAT_LON = dumm.loc[result.index][['LAT','LON']]
+    result = pd.concat([result,LAT_LON],axis=1).reset_index()
     result.index=result.index+1
     return weather, result, date
 
