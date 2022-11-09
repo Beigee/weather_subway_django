@@ -128,5 +128,8 @@ ui-tests/playwright-report
 .vscode
 .venv 
 
+# IntelliJ
+.idea
+
 # RTC
 .jupyter_ystore.db
