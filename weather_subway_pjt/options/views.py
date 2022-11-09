@@ -17,8 +17,8 @@ def subway_opt(request):
 	# 2. result에 넣는 코드
 	# 3. 위경도 정보를 subway_opt로 넘기는 코드
 	# 4. subway_opt측에서 위경도 정보를 좌표 입력란에 넣는 코드
-	result.columns = ['ranking', 'station_name', 'result']
-	test = result.to_dict('ranking')
+	result.columns = ['ranking', 'station_name', 'result', 'lat', 'lng']
+	result = result.to_dict('ranking')
 	y = date.values[0][:4]
 	m = date.values[0][5:7]
 	d = date.values[0][9:10]
@@ -43,13 +43,12 @@ def subway_opt(request):
 	else:
 		pm25 = '/static/img/PM25_verybad.jpg'
 
-
 	context = {'tmp': weather.ONDO.iloc[0], 'humn': weather.HUMN.iloc[0], 'sky': weather.SKY.iloc[0],
 			   'rain': weather.RAIN.iloc[0],'snow': weather.SNOW.iloc[0],'windd': weather.WINDD.iloc[0],
 			   'winds': weather.WINDS.iloc[0], 'pm10' : pm10, 'pm25':pm25}
 	# 미세먼지는 넘길때 이미지 경로를 설정해서 넘기기
 
-	return render(request,  'options/subway_opt.html', {'weather':context, 'result':test,'gu':gu, 'year':y, 'month' : m, 'day' : d, 'time':time})
+	return render(request,  'options/subway_opt.html', {'weather':context, 'result':result,'gu':gu, 'year':y, 'month' : m, 'day' : d, 'time':time})
 	# return render(request, 'sharesRes/restaurantUpdate.html', content)
 	# return render(request, 'options/subway_opt.html') # render할때 context를 붙여서 보내기!
 

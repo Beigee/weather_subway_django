@@ -21,27 +21,15 @@
         },
         zoom: 10,
       });
-      const malls = [{
-        label: "서울대입구",
-        name: "서울대입구역2호선",
-        lat: 37.481171595091126,
-        lng: 126.95271747221375
-      }, {
-        label: "낙성대",
-        name: "낙성대역앞",
-        lat: 37.477112636552995,
-        lng: 126.96339149035184
-      }, {
-        label: "봉천",
-        name: "봉천역3번출구",
-        lat: 37.48236743532565,
-        lng: 126.94152819410401
-      }, {
-        label: "신림",
-        name: "신림역사거리",
-        lat: 37.484243690027924,
-        lng: 126.92971489325407
-      }, ];
+        {% block maps %}
+      var malls = [
+          {% for res in result %}
+          {label: "{{res.station_name}}",
+          name: "{{res.station_name}}",
+          lat: {{res.lat}},
+          lng: {{res.lng}}},
+        {% endfor %}   ];
+        {% endblock %}
       const bounds = new google.maps.LatLngBounds();
       const infowindow = new google.maps.InfoWindow();
       malls.forEach(({
@@ -57,6 +45,10 @@
           },
           label,
           map: map,
+          icon:{
+              url:'/static/img/marker.png',
+              labelOrigin: new google.maps.Point(7, -10),
+          }
         });
         bounds.extend(marker.position);
         marker.addListener("click", () => {
