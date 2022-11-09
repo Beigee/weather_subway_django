@@ -11,7 +11,7 @@ from datetime import datetime
 # 넘어온 정보를 가중치와 병합, 길이를 맞춤
 def pre_predict(wea,gu):
     weather = pd.DataFrame()
-    station_W = pd.read_csv('options/dummie_data/station_W.csv')
+    station_W = pd.read_csv('options/dummie_data/station_W.csv',encoding='cp949')
 
     W = station_W[station_W['GU'] == gu].set_index('STATION_NAME',drop=False)[['W']]
     wea = pd.DataFrame(wea)
