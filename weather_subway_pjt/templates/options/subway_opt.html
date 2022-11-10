@@ -301,7 +301,10 @@
                     <td>{{ i.result }}</td>
 <!-- {#                    버튼마다 form 또는 a 태그로 active#}
 {#                    또는 on click이벤트 핸들러#} -->
-                    <td><a><button class="custom-btn btn-3" value="{{ i.station_name }}"><span>선택</span></a></td>
+                    <td><form method="get" action="/options/place_opt"><button class="custom-btn btn-3" >
+                        <input type="hidden" name="station" value="{{ i.station_name }}">
+                        <input type="hidden" name="pop" value="{{ i.result }}">
+                        <span>선택</span></button></form></td>
                 </tr>
                 {% endfor %}
                 </tbody>
