@@ -1,0 +1,319 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block style_code %}
+  <link rel="stylesheet" href="{% static 'css/Untitled.css' %}">
+  <style> 
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .custom-btn {
+      width: 80px;
+      height: 30px;
+      padding: 10px 25px;
+      border: 0px solid #000;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+    .btn-3 {
+      background: #11bbad;
+      line-height: 29px;
+      padding: 0;
+    }
+    .btn-3:hover{
+      background: transparent;
+      color: #000;
+    }
+    .btn-3 span {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .btn-3:before,
+    .btn-3:after {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 0;
+      background: #000;
+      transition: all 0.3s ease;
+    }
+    .btn-3:before {
+      height: 0%;
+      width: 2px;
+    }
+    .btn-3:after {
+      width: 0%;
+      height: 2px;
+    }
+    .btn-3:hover:before {
+      height: 100%;
+    }
+    .btn-3:hover:after {
+      width: 100%;
+    }
+    .btn-3 span:before,
+    .btn-3 span:after {
+      position: absolute;
+      content: "";
+      right: 0;
+      bottom: 0;
+      background: #000;
+      transition: all 0.3s ease;
+    }
+    .btn-3 span:before {
+      width: 2px;
+      height: 0%;
+    }
+    .btn-3 span:after {
+      width: 0%;
+      height: 2px;
+    }
+    .btn-3 span:hover:before {
+      height: 100%;
+    }
+    .btn-3 span:hover:after {
+      width: 100%;
+    }
+    .btn-group{
+      width:90%;
+      height:80px;
+      font-size:50px;  
+    }
+    
+    hr[role="tournament2"] {
+      border: 0px solid;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 140, 186, 0.75), rgba(0, 0, 0, 0));
+      margin: 32px 0px;
+      display: block;
+    }
+    .btn{
+      font-size:25px;
+      font-weight:600;
+      
+      box-shadow: -2px -2px 5px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+    }
+    #sta{ 
+      font-size:15px;
+    }
+    </style>
+{% endblock %}
+
+{% block script_code %}
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/handlebars/4.7.7/handlebars.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <script>
+    window.initMap = function() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+          lat: 37.5400456,
+          lng: 126.9921017
+        },
+        zoom: 10,
+      });
+      {% block maps %}
+      var malls = [
+        {% for res in result %}
+          {label: "{{res.station_name}}",
+          name: "{{res.station_name}}",
+          lat: {{res.lat}},
+          lng: {{res.lng}}},
+        {% endfor %}   ];
+      {% endblock %}
+      const bounds = new google.maps.LatLngBounds();
+      const infowindow = new google.maps.InfoWindow();
+      malls.forEach(({
+        label,
+        name,
+        lat,
+        lng
+      }) => {
+        const marker = new google.maps.Marker({
+          position: {
+            lat,
+            lng
+          },
+          label,
+          map: map,
+          icon:{
+              url:'/static/img/marker.png',
+              labelOrigin: new google.maps.Point(7, -10),
+          }
+        });
+        bounds.extend(marker.position);
+        marker.addListener("click", () => {
+          infowindow.setContent(name);
+          infowindow.open({
+            anchor: marker,
+            map,
+          });
+        });
+      });
+      map.fitBounds(bounds);
+    };
+  </script>
+<!--  <script defer src="./index.js"></script>-->
+  <script defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzu2iFOodz7NEWlhrBvz8lv-0DZ81cEpI&amp;&amp;callback=initMap"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h3 class="" style="margin-top:15px; ">{{ year }}년 {{ month }}월 {{ day }}일 {{ time }}시 서울시 {{gu}}의 날씨 및 미세먼지 입니다. </h3>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6"><img class="img-fluid d-block float-right" src="{% static 'img/tourist.png' %}" width="60">
+                </div>
+                <div class="col-md-6"><img class="img-fluid d-block" src="{% static 'img/tourists.png' %}" width="60">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      {% block web_content %}
+        <div class="col-md-6">
+          <div class="table-responsive">
+                <table class="table table-striped table-borderless" style="text-align:center;">
+                  <thead>
+                    <tr class="Weather">
+                      <th colspan="2">날씨 확인하기</th>
+                    </tr>
+                  </thead>
+                      <tbody>
+                        <tr>
+                          <td><i class="fa fa-thermometer-quarter">&nbsp; 기온</i></td>
+                          <td>{{ weather.tmp }}</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-sun-o"></i>&nbsp; 하늘상태</td>
+                          {% if weather.sky == 1 %}
+                            <td>맑음</td>
+                          {% elif weather.sky == 3 %}
+                            <td>구름많음</td>
+                          {% else %}
+                            <td>흐림</td>
+                          {% endif %}
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-tint"></i>&nbsp; 습도</td>
+                          <td>{{ weather.humn }}</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-fa fa-paper-plane "></i>&nbsp; 풍향</td>
+                          <td>{{ weather.windd }}</td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-life-ring"></i>&nbsp; 풍속</td>
+                          <td>{{ weather.winds }}</td>
+                        <tr>
+                          <td><i class="fa fa-umbrella"></i>&nbsp; 강수량 (mm)</td>
+                          {% if weather.rain == 0 %}
+                            <td>강수없음</td>
+                          {% else %}
+                            <td>{{ weather.rain }}</td>
+                          {% endif %}
+                        </tr>
+                        <tr>
+                          <td><i class="fa fa-snowflake-o">&nbsp; 적설량 (mm)</i></td>
+                          {% if weather.snow == 0 %}
+                            <td>적설없음</td>
+                          {% else %}
+                            <td>{{ weather.snow }}</td>
+                          {% endif %}
+                        </tr>
+                      </tbody>
+                </table>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5" style="margin-top:50px;">
+                <img class="img-fluid d-block" src={{ weather.pm10 }}>
+              <div class="row">
+                <div class="col-md-12" align="center" style="margin-top:10px;">
+                  <h5 contenteditable="true"><b>미세먼지</b></h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5" style="margin-top:50px;">
+              <div class="row">
+                <div class="col-md-12">
+                    <img class="img-fluid d-block" src={{ weather.pm25 }}>
+                  <div class="row">
+                    <div class="col-md-12" align="center" style="margin-top:10px;">
+                      <h5 contenteditable="true"><b>초미세먼지</b></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr role="tournament2">
+      </div>
+      {% endblock %}
+      <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4" style="">
+            <div class="table-responsive">
+            {% block result %}
+              <table id="sta" class="table">
+                <thead>
+                  <tr align="center">
+                    <th></th>
+                    <th>예상 유동인구 순위</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <th>순위</th>
+                    <th>역이름</th>
+                    <th>예상유동인구</th>
+                    <th>선택</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in result %}
+                <tr>
+                    <td>{{ i.ranking }}</td>
+                    <td>{{ i.station_name }}</td>
+                    <td>{{ i.result }}</td>
+<!-- {#                    버튼마다 form 또는 a 태그로 active#}
+{#                    또는 on click이벤트 핸들러#} -->
+                    <td><a><button class="custom-btn btn-3" value="{{ i.station_name }}"><span>선택</span></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            {% endblock %}
+            </div>
+          </div>
+          <div class="col-md-8" style="">
+            <div id="map" style="height: 600px; width: 750px; margin-left: 0px; margin-top: 0px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
