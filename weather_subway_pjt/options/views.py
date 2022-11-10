@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from options import module_test
 from django.contrib.auth.decorators import login_required
+from options.models import Tourism
 # Create your views here.
 @login_required(login_url='accounts:log_in')
 def date_opt(request):
@@ -10,6 +11,7 @@ def date_opt(request):
 
 @login_required(login_url='accounts:log_in')
 def subway_opt(request):
+	global context, result, gu,y, m, d, time
 	day = request.GET['day']
 	time = request.GET['time']
 	gu = request.GET['gu']
@@ -57,4 +59,10 @@ def subway_opt(request):
 
 @login_required(login_url='accounts:log_in')
 def place_opt(request):
-	return render(request, 'options/place_opt.html')
+	station = request.GET['station']
+	pop=request.GET['pop']
+	res={'station':station,'pop':pop[:-2]}
+	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','lat','lon')
+	print(tour)
+
+	return render(request, 'options/place_opt.html',{'tourist':tour,'station_pop':res,'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})

@@ -4,7 +4,7 @@
 {% block style_code %}
   <link rel="stylesheet" href="{% static 'css/Untitled.css' %}">
   <style> 
-    body {
+    * {
       font-family: 'Noto Sans KR', sans-serif;
     }
     html, body {
@@ -180,7 +180,7 @@
       <div class="row">
         <div class="col-md-8">
           <h3 class="" style="margin-top:15px; ">
-            {{ year }}년 <span class="now_date" style="font-family: 'Jua', sans-serif; ">{{ month }}월 {{ day }}일 {{ time }}시</span> 서울시 <span class="gu" style="font-family: 'Jua', sans-serif; ">{{gu}}</span>의 날씨 및 미세먼지 </h3>
+            {{ year }}년 <span class="now_date" style="font-family: 'Jua', sans-serif;">{{ month }}월 {{ day }}일 {{ time }}시</span> 서울시 <span class="gu" style="font-family: 'Jua', sans-serif; ">{{gu}}</span>의 날씨 및 미세먼지 </h3>
         </div>
         <div class="col-md-4">
           <div class="row">
@@ -303,7 +303,12 @@
                     <td>{{ i.ranking }}</td>
                     <td>{{ i.station_name }}</td>
                     <td>{{ i.result }}</td>
-                    <td><a><button class="custom-btn btn-3" value="{{ i.station_name }}"><span>선택</span></a></td>
+<!-- {#                    버튼마다 form 또는 a 태그로 active#}
+{#                    또는 on click이벤트 핸들러#} -->
+                    <td><form method="get" action="/options/place_opt"><button class="custom-btn btn-3" >
+                        <input type="hidden" name="station" value="{{ i.station_name }}">
+                        <input type="hidden" name="pop" value="{{ i.result }}">
+                        <span>선택</span></button></form></td>
                 </tr>
                 {% endfor %}
                 </tbody>
