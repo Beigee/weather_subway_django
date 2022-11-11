@@ -79,6 +79,13 @@
     height: 100%;
     width: 100%;
   }
+  .scroll_head,.scroll_body { display: block; }
+
+  .scroll_body {
+    height:550px;
+
+    overflow-y: auto;
+  }
 </style>
 {% endblock %}
 
@@ -148,24 +155,23 @@
     <div class="col-md-8" style="">
       <div
         id="map"
-        style="height: 600px; width: 750px; margin-left: 0px; margin-top: 0px"
-      ></div>
+        style="height: 600px; width: 750px; margin-left: 0px; margin-top: 0px;"></div>
     </div>
     <div class="col-md-4" style="">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
+      <div class="table-responsive" style="width:450px">
+          <table class="table" >
+          <thead class="scroll_head">
             <tr align="center">
               <th></th>
               <th>관광지 및 맛집</th>
-              <th></th>
+              <th>&nbsp;&nbsp;&nbsp;카테고리</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="scroll_body">
           {% for i in tourist %}
           <tr align="center">
-              <td></td>
               <td>{{ i.t_name }}</td>
+              <td>{{ i.cate }}</td>
               <td>
                 <button class="snip1535">Add Location</button>
               </td>
@@ -286,7 +292,6 @@
         </div>
         <hr role="tournament2">
       </div>
+    </div>
+  </div>
 {% endblock %}
-
-
-    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>

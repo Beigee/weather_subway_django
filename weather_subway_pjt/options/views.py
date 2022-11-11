@@ -61,8 +61,8 @@ def subway_opt(request):
 def place_opt(request):
 	station = request.GET['station']
 	pop=request.GET['pop']
-	res={'station':station,'pop':pop[:-2]}
-	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','lat','lon')
+	res={'station':station,'pop':pop}
+	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','cate','lat', 'lon')
 	print(tour)
 
 	return render(request, 'options/place_opt.html',{'tourist':tour,'station_pop':res,'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})

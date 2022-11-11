@@ -21,7 +21,9 @@ def pre_predict(wea,gu):
         weather = pd.concat([weather,wea],axis=0)
         # gu에서 받아온 역의 갯수만큼 날씨변수 생성
     weather.index = W.index
-    values = pd.concat([np.log1p(weather),W], axis=1)
+    feat=weather.columns.drop('ONDO')
+    weather[feat]=np.log1p(weather[feat])
+    values = pd.concat([weather,W], axis=1)
     values.index = W.index# 날씨와 가중치 컬럼 합병
     return values
 
@@ -32,6 +34,7 @@ def predict(values):
     result = pd.DataFrame(np.expm1(result))
     result.index = values.index
     result.columns = ['result']
+    result['result'] = result['result'].astype(int)
     result.sort_values(by='result', ascending=False, inplace=True)
     result.reset_index(drop=False,inplace=True)
 
