@@ -132,7 +132,7 @@
       {% block maps %}
       var malls = [
         {% for res in result %}
-          {label: "{{res.station_name}}",
+          {station_label: "{{res.station_name}}",
           name: "{{res.station_name}}",
           lat: {{res.lat}},
           lng: {{res.lng}}},
@@ -141,7 +141,7 @@
       const bounds = new google.maps.LatLngBounds();
       const infowindow = new google.maps.InfoWindow();
       malls.forEach(({
-        label,
+        station_label,
         name,
         lat,
         lng
@@ -151,7 +151,12 @@
             lat,
             lng
           },
-          label,
+          label: {
+            text:station_label,
+            fontFamily: 'Jua',
+            color:"black",
+            
+          },
           map: map,
           icon:{
               url:'/static/img/marker.png',
@@ -282,7 +287,7 @@
       <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
       <div class="container">
         <div class="row">
-          <div class="col-md-4" style="">
+          <div class="col-md-4" style="max-height: 600px; overflow:auto; padding: 0;">
             <div class="table-responsive">
             {% block result %}
               <table id="sta" class="table">
@@ -290,16 +295,16 @@
                   <tr>
                     <span class="float_pop_rank" style="font-family: 'Jua', sans-serif; font-size: 22px; margin-left: 90px;">예상 유동인구 순위</span>
                   </tr>
-                  <tr>
+                  <tr style="text-align: center; font-size: 15px;">
                     <th>순위</th>
                     <th>역이름</th>
-                    <th style="text-align: center; font-size: 14.5px;">예상유동인구</th>
-                    <th style="text-align: center;">선택</th>
+                    <th>예상유동인구</th>
+                    <th>선택</th>
                   </tr>
                 </thead>
                 <tbody>
                 {% for i in result %}
-                <tr>
+                <tr style="text-align: center;">
                     <td>{{ i.ranking }}</td>
                     <td>{{ i.station_name }}</td>
                     <td>{{ i.result }}</td>
