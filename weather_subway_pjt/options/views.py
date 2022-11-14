@@ -1,15 +1,16 @@
 #options->views.py
 from django.shortcuts import render
+import pandas as pd
 from django.http import HttpResponse
 from options import module_test
 from django.contrib.auth.decorators import login_required
 from options.models import Tourism
 # Create your views here.
-@login_required(login_url='accounts:log_in')
+# @login_required(login_url='accounts:log_in')
 def date_opt(request):
 	return render(request, 'options/date_opt.html')
 
-@login_required(login_url='accounts:log_in')
+# @login_required(login_url='accounts:log_in')
 def subway_opt(request):
 	global context, result, gu,y, m, d, time
 	day = request.GET['day']
@@ -52,17 +53,32 @@ def subway_opt(request):
 			   'rain': weather.RAIN.iloc[0],'snow': weather.SNOW.iloc[0], 'windd': weather.WINDD.iloc[0],
 			   'winds': weather.WINDS.iloc[0], 'pm10': pm10, 'pm25': pm25}
 	# 미세먼지는 넘길때 이미지 경로를 설정해서 넘기기
-
 	return render(request,  'options/subway_opt.html', {'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})
 	# return render(request, 'sharesRes/restaurantUpdate.html', content)
 	# return render(request, 'options/subway_opt.html') # render할때 context를 붙여서 보내기!
 
-@login_required(login_url='accounts:log_in')
+# @login_required(login_url='accounts:log_in')
+def sort_station(sta):
+	tour = pd.read_csv('options/dummie_data/tourist.csv', encoding='cp949')
+	tour = tour[tour['STATION_NAME'] == sta]
+	tour = tour[['STATION_NAME', 'T_NAME', 'CATE', 'LAT', 'LON']]
+	tour.columns = ['station_name', 't_name', 'cate', 'lat', 'lon']
+	cate = []
+	for i in tour['cate']:
+		if i == '관광지':
+			i = 'tour'
+			cate.append(i)
+		else:
+			i = 'res'
+			cate.append(i)
+	tour['cate'] = cate
+	tour = tour.reset_index(drop=True)
+	tour['t_name'] = tour['t_name'].apply(lambda x: x.replace('/',''))
+	return tour
 def place_opt(request):
+	global tour
 	station = request.GET['station']
 	pop=request.GET['pop']
-	res={'station':station,'pop':pop}
-	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','cate','lat', 'lon')
-	print(tour)
-
+	res={'station':station,'pop':pop} # tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','cate','lat', 'lon')
+	tour = sort_station(station).to_dict('records')
 	return render(request, 'options/place_opt.html',{'tourist':tour,'station_pop':res,'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})

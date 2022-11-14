@@ -17,14 +17,14 @@ import os
 LOGIN_REDIRECT_URL = '/options/date_opt/'
 LOGOUT_REDIRECT_URL = '/'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'finalproject_high',
-        'USER': 'db_final',
-        'PASSWORD': '123QWE!@#qwe',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.oracle',
+#         'NAME': 'finalproject_high',
+#         'USER': 'db_final',
+#         'PASSWORD': '123QWE!@#qwe',
+#     }
+# }
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
