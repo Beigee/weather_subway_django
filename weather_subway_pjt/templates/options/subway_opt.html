@@ -152,7 +152,7 @@
             lng
           },
           label: {
-            text:station_label,
+            // text:station_label,
             fontFamily: 'Jua',
             color:"black",
             
@@ -295,7 +295,7 @@
                   <tr>
                     <span class="float_pop_rank" style="font-family: 'Jua', sans-serif; font-size: 22px; margin-left: 90px;">예상 유동인구 순위</span>
                   </tr>
-                  <tr style="text-align: center; font-size: 15px;">
+                  <tr style="text-align: center; font-size: 14px;">
                     <th>순위</th>
                     <th>역이름</th>
                     <th>예상유동인구</th>
@@ -307,7 +307,7 @@
                 <tr style="text-align: center;">
                     <td>{{ i.ranking }}</td>
                     <td>{{ i.station_name }}</td>
-                    <td>{{ i.result }}</td>
+                    <td>{{ i.result }}명</td>
 <!-- {#                    버튼마다 form 또는 a 태그로 active#}
 {#                    또는 on click이벤트 핸들러#} -->
                     <td><form method="get" action="/options/place_opt"><button class="custom-btn btn-3" >
