@@ -1,17 +1,215 @@
-<!DOCTYPE html>
-<html>
+{% extends 'common/base.html' %}
+{% load static %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-  <style> /*Delete Place-btn*/
+{% block style_code %}
+  <style> /*table head*/
+    table {
+      width: 548px;
+      text-align: center;
+      border: 1px solid #fff;
+      border-spacing: 1px;
+      font-family: 'Cairo', sans-serif;
+      margin: auto;
+		}
+    
+		caption {
+    	font-weight: bold;
+		}
+
+		table td {
+      padding: 10px;
+      background-color: #eee;
+  	}
+
+		table th {
+      background-color: #11bbad;
+      color: #fff;
+      padding: 10px;
+  	}
+        /*addmore-btn*/
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 37%;
+        transform: translate(-50%, -50%);
+    }
+
+    a span {
+        padding: 15px;
+        transition: .5s;
+        position: relative;
+    }
+    a span:nth-child(1) {
+        color: #fff;
+        background: #11bbad;
+    }
+    a span:nth-child(2) {
+        color: #fff;
+        background: #ff3636;
+    }
+    a span:nth-child(1):before {
+        content: attr(data-attr);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #ff3636;
+        padding: 15px;
+        transition: 0.5S;
+        transform-origin: top;
+        transform: rotateX(90deg) translateY(-50%);
+    }
+    a:hover span:nth-child(1):before {
+        transform: rotateX(0deg) translateY(0%);
+    } 
+    a span:nth-child(2):before {
+        content: attr(data-attr);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #11bbad;
+        padding: 15px;
+        transition: 0.5S;
+        transform-origin: bottom;
+        transform: rotateX(90deg) translateY(50%);
+    }
+    a:hover span:nth-child(2):before {
+        transform: rotateX(0deg) translateY(0%);
+    } 
+    a  span:nth-child(1):after {
+      content: attr(data-attr);
+      padding: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #11bbad;
+      transform-origin: bottom;
+      transform: rotateX(0deg) translateY(0%);
+      transition: 0.5s;
+    }
+    a:hover span:nth-child(1):after {
+      transform: rotateX(90deg) translateY(50%);
+    }
+    a span:nth-child(2):after {
+        content: attr(data-attr);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #ff3636;
+        padding: 15px;
+        transition: 0.5S;
+        transform-origin: top;
+        transform: rotateX(0deg) translateY(0%);
+    }
+    a:hover span:nth-child(2):after {
+        transform: rotateX(90deg) translateY(-50%);
+    }
+    /*table container setting*/
+
+    .table-container{
+      flex-wrap: wrap;
+      width:545px;
+      height:400px;
+      margin: 20px 10px 20px 10px;
+    }
+    
+   /*check list button*/
+
+     .list {
+	 display: inline-block;
+	 flex-direction: column;
+	 margin: 0;
+	 padding: 0;
+	 width: 100%;
+	 max-width: 549px;
+	 background-color: #fff;
+	 border-radius: 6px;
+	 box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
+	 list-style: none;
+	 overflow: hidden;
+}
+ .list .list-item {
+	 margin: 0;
+	 padding: 0;
+	 border-bottom: 1px solid #ecf0f1;
+	 position: relative;
+}
+ .list .list-item:last-child {
+	 border: 0;
+}
+ .hidden-box {
+	 position: absolute;
+	 top: -9999px;
+	 left: -9999px;
+	 appearance: none;
+	 opacity: 0;
+}
+ .check--label {
+	 font-size: 20px;
+	 margin: 0;
+	 display: flex;
+	 flex-direction: row;
+	 flex-wrap: nowrap;
+	 justify-content: flex-start;
+	 align-items: center;
+}
+ .check--label-box {
+	 display: flex;
+	 align-self: center;
+	 position: relative;
+	 height: 20px;
+	 width: 20px;
+	 margin: 0 20px;
+	 border: 2px solid #3498db;
+	 border-radius: 2px;
+	 cursor: pointer;
+}
+ .check--label-text {
+	 display: flex;
+	 align-self: center;
+	 position: relative;
+	 cursor: pointer;
+	 padding: 20px;
+	 border-left: 1px solid #ecf0f1;
+}
+ .check--label-text:after {
+	 content: '';
+	 display: block;
+	 width: 0%;
+	 height: 2px;
+	 background-color: #000;
+	 position: absolute;
+	 top: 50%;
+	 left: 7.5%;
+	 transform: translateY(-50%);
+	 transition: width 100ms ease-in-out;
+}
+ .hidden-box:checked + .check--label {
+	 background-color: #F9F9F9;
+}
+ .hidden-box:checked + .check--label .check--label-box {
+	 background-color: #3498db;
+}
+ .hidden-box:checked + .check--label .check--label-box:after {
+	 content: '';
+	 display: block;
+	 position: absolute;
+	 top: -1px;
+	 left: 4px;
+	 width: 6px;
+	 height: 12px;
+	 border: solid #000;
+	 border-width: 0 2px 2px 0;
+	 transform: rotate(45deg);
+}
+ .hidden-box:checked + .check--label .check--label-text:after {
+	 width: 85%;
+}
+    /*Delete Place button*/
     .button {
   background: #3D4C53;
-  margin-top : 7px;
-  margin-left: 5%;
-  width : 90%;
+  margin-top : 17px;
+  
+  width : 540px;
   height : 30px;
   overflow: hidden;
   text-align : center;
@@ -49,221 +247,76 @@
 .button:active { /*Clicked and held*/
   box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
 }
-
-    /*addmore-btn*/
-.center {
-    position: absolute;
-    top: 50%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-}
-
-a span {
-    padding: 15px;
-    transition: .5s;
-    position: relative;
-}
-a span:nth-child(1) {
-    color: #fff;
-    background: #11bbad;
-}
-a span:nth-child(2) {
-    color: #fff;
-    background: #ff3636;
-}
-a span:nth-child(1):before {
-    content: attr(data-attr);
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #ff3636;
-    padding: 15px;
-    transition: 0.5S;
-    transform-origin: top;
-    transform: rotateX(90deg) translateY(-50%);
-}
-a:hover span:nth-child(1):before {
-    transform: rotateX(0deg) translateY(0%);
-}
-a span:nth-child(2):before {
-    content: attr(data-attr);
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #11bbad;
-    padding: 15px;
-    transition: 0.5S;
-    transform-origin: bottom;
-    transform: rotateX(90deg) translateY(50%);
-}
-a:hover span:nth-child(2):before {
-    transform: rotateX(0deg) translateY(0%);
-}
-a  span:nth-child(1):after {
-  content: attr(data-attr);
-  padding: 15px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #11bbad;
-  transform-origin: bottom;
-  transform: rotateX(0deg) translateY(0%);
-  transition: 0.5s;
-}
-a:hover span:nth-child(1):after {
-  transform: rotateX(90deg) translateY(50%);
-}
-a span:nth-child(2):after {
-    content: attr(data-attr);
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #ff3636;
-    padding: 15px;
-    transition: 0.5S;
-    transform-origin: top;
-    transform: rotateX(0deg) translateY(0%);
-}
-a:hover span:nth-child(2):after {
-    transform: rotateX(90deg) translateY(-50%);
-}
-
+  
   </style>
-</head>
+  {% endblock %}
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="#">
-          <i class="fa d-inline fa-lg fa-circle"></i>
-          <b> BRAND</b>
-        </a>
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#" style="font-size: 15px"><b>About</b></a> </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link" href="#">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="#">Register</a> </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  {% block script_code %}
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script> $('input[name=_selected_all_]').on('change', function(){
+  $('input[name=_selected_]').prop('checked', this.checked);
+});
+
+var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item) { return item.value });
+  </script>
+{% endblock %}
+
+{% block content %}
   <div class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h1 class="display-3" >My Place</h1>
+        <div class="col-md-6">
+          <h1 class="display-3">My Place</h1>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="row">
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active"><b>관악구 서울대입구역</b></a>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                </div>
-                <div class="col-md-12">
-                  <div id="holder">
-                    <div class="button">
-                      <p class="btnText">Delete Place</p>
-                      <div class="btnTwo">
-                        <p class="btnText2">X</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active"><b>관악구 낙성대역</b></a>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                </div>
-                <div class="col-md-12">
-                  <div id="holder">
-                    <div class="button">
-                      <p class="btnText">Delete Place</p>
-                      <div class="btnTwo">
-                        <p class="btnText2">X</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active"><b>마포구 망원역</b></a>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-                </div>
-                <div class="col-md-12">
-                  <div id="holder">
-                    <div class="button">
-                      <p class="btnText">Delete Place</p>
-                      <div class="btnTwo">
-                        <p class="btnText2">X</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="col-md-12">
+              <div class="center">
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="py-5">
-    <div class="container">
       <div class="row">
-        <div class="col-md-4" style="">
-          <div class="col-md-12">
-            <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active"><b contenteditable="true">관악구 봉천역</b></a>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <a class="btn btn-primary" href="#">X</a> </li>
-            </div>
+
+        <div class="table-container">
+          <form method="get">
+            <table>
+              <thead>
+                <tr>
+                  <th>역 이름</th>
+                </tr>
+              </thead>
+            </table>
+            <ul class="list">
+              <li class="list-item">
+                <input type="checkbox" class="hidden-box" name="del-loc" id="first" value="first">
+                <label for="first" class="check--label">
+                  <span class="check--label-box"></span>
+                  <span class="check--label-text">First Checkbox</span>
+                </label>
+              </li>
+
+            </ul>
             <div class="col-md-12">
               <div id="holder">
-                <div class="button">
+                <button class="button" onclick="$('#내장소').trigger('click');">
+                  <input id="내장소" type="submit" style="display:none;">
                   <p class="btnText">Delete Place</p>
                   <div class="btnTwo">
-                    <p class="btnText2">X</p>
                   </div>
-                </div>
+                  <p class="btnText2">X</p>
+                </button>
               </div>
             </div>
+          </form>
+        </div>
+        <div class="table-container">
+          <div style="margin-top:13%; margin-left:12%; position:absolute;">
+            <a href="options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
           </div>
         </div>
-        <div class="col-md-4" style="">
-          <div class="center"><a href="/"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size:30px; text-transform: uppercase"></span></a>
-          </div>
-        </div>
-        <div class="col-md-4" style=""></div>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
-</body>
-
-</html>
+  {% endblock %}
