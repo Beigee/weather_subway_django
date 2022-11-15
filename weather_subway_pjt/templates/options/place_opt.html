@@ -991,7 +991,7 @@
           {% for i in tourist %}
             <tr align="center">
                 <td>{{ i.t_name }}</td>
-                <td>
+                <td style="position:relative;width:200px;">
                 <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#{{ i.t_name }}').trigger('click');">
                 <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span><span class="{{ i.cate }}-cross"></span><i></i>
                 <p>add</p>
