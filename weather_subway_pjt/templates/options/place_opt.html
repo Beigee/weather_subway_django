@@ -800,7 +800,9 @@
     input[type=checkbox] + .res {display:none;}
     input[type=checkbox]:checked + .res {
     position:absolute;
+
     background:url("/static/img/noname2.png") center no-repeat;
+
     background-size:cover;
     z-index:30;
     width:110px;
@@ -971,6 +973,7 @@
       <input type="hidden" name="gu" value="{{ gu }}"/>
 
 <div class="container" style="margin-top: 70px">
+
   <div class="row">
     <div class="col-md-8" style="">
       <div
@@ -979,19 +982,23 @@
     </div>
     <div class="col-md-4" style="">
       <div class="table-responsive" style="width:450px">
-          <table class="table" >
+          <table class="table" style="">
           <thead class="scroll_head">
             <tr align="center">
 
               <th>관광지 및 맛집</th>
+
               <th></th>
+
             </tr>
           </thead>
-          <tbody class="scroll_body">
+          <tbody class="scroll_body" style="height:550px;">
           {% for i in tourist %}
             <tr align="center">
                 <td>{{ i.t_name }}</td>
+
                 <td style="position:relative;width:200px;">
+
                 <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#{{ i.t_name }}').trigger('click');">
                 <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span><span class="{{ i.cate }}-cross"></span><i></i>
                 <p>add</p>
@@ -999,6 +1006,7 @@
                 <input type="hidden" name="{{ i.t_name }}" value="{{ i.cate }}" />
                 </td>
             </tr>
+
           {% endfor %}
           </tbody>
         </table>
@@ -1026,7 +1034,7 @@
     </div>
     </form>
   <h3 class="" style="margin-top: 15px">
-    <span class="place_subway" style="font-family: 'Jua', sans-serif;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="font-family: 'Jua', sans-serif;">{{ station_pop.pop }}명</span> 입니다.
+    <span class="place_subway" style="font-family: 'Jua', sans-serif; margin-left: 400px;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="font-family: 'Jua', sans-serif;">{{ station_pop.pop }}명</span> 입니다.
   </h3>
 </div>
 

@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends 'common/base.html' %}
+{% load static %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script> $('input[name=_selected_all_]').on('change', function(){
-  $('input[name=_selected_]').prop('checked', this.checked);
-});
+{% block style_code %}
 
-
-//----------------------------------------------------------------------------
-// 선택한 Checkbox 값을 가져오는 방법은...
-
-var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item) { return item.value });
-  </script>
   <style> /*table head*/
     table {
       width: 548px;
@@ -264,26 +250,21 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
 }
   
   </style>
-</head>
+  {% endblock %}
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6" style="">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="#">
-          <i class="fa d-inline fa-lg fa-circle"></i>
-          <b> BRAND</b>
-        </a>
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#"><b>About Us</b></a> </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link" href="#">Log Out</a> </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+  {% block script_code %}
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script> $('input[name=_selected_all_]').on('change', function(){
+  $('input[name=_selected_]').prop('checked', this.checked);
+});
+
+var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item) { return item.value });
+  </script>
+{% endblock %}
+
+{% block content %}
+
   <div class="py-5">
     <div class="container">
       <div class="row">
@@ -305,37 +286,19 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
             <table>
               <thead>
                 <tr>
-                  <th>내 장소</th>
+
+                  <th>역 이름</th>
+
                 </tr>
               </thead>
             </table>
             <ul class="list">
               <li class="list-item">
-                <input type="checkbox" class="hidden-box" name="del-loc" checked="" id="first" value="first">
+                <input type="checkbox" class="hidden-box" name="del-loc" id="first" value="first">
+
                 <label for="first" class="check--label">
                   <span class="check--label-box"></span>
                   <span class="check--label-text">First Checkbox</span>
-                </label>
-              </li>
-              <li class="list-item">
-                <input type="checkbox" class="hidden-box" id="second" name="del-loc" value="second">
-                <label for="second" class="check--label">
-                  <span class="check--label-box"></span>
-                  <span class="check--label-text">Second Checkbox</span>
-                </label>
-              </li>
-              <li class="list-item">
-                <input type="checkbox" class="hidden-box" id="third" name="del-loc" value="third">
-                <label for="third" class="check--label">
-                  <span class="check--label-box"></span>
-                  <span class="check--label-text">Third Checkbox</span>
-                </label>
-              </li>
-              <li class="list-item">
-                <input type="checkbox" class="hidden-box" id="third" name="del-loc">
-                <label for="third" class="check--label">
-                  <span class="check--label-box"></span>
-                  <span class="check--label-text">Third Checkbox</span>
                 </label>
               </li>
             </ul>
@@ -354,7 +317,8 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
         </div>
         <div class="table-container">
           <div style="margin-top:13%; margin-left:12%; position:absolute;">
-            <a href=options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
+            <a href="options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
+
           </div>
         </div>
       </div>
@@ -364,6 +328,6 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
   </div>
-</body>
 
-</html>
+  {% endblock %}
+
