@@ -907,6 +907,19 @@
 
 
   </style>
+  <style type="text/css">
+    .map-label {
+  width: auto;
+  height: 28px;
+  border: 1.5px solid black;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  font-size: 18px;
+}
+    </style>
 
 {% endblock %}
 
@@ -929,8 +942,11 @@
       {% block maps %}
       var malls = [
         {% for i in tourist %}
-          {label: "{{i.t_name}}",
-          name: "{{i.t_name}}",
+            {label: { text:"　{{i.t_name}}　",
+                    color:"black",
+                    fontSize:'13px',
+                    className: "map-label",
+                },
           lat: {{i.lat}},
           lng: {{i.lon}}},
         {% endfor %}   ];
@@ -956,13 +972,7 @@
           }
         });
         bounds.extend(marker.position);
-        marker.addListener("click", () => {
-          infowindow.setContent(name);
-          infowindow.open({
-            anchor: marker,
-            map,
-          });
-        });
+        
       });
       map.fitBounds(bounds);
     };
@@ -987,15 +997,10 @@
     </div>
     <div class="col-md-4" style="">
       <div class="table-responsive" style="width:450px">
-          <table class="table" style="">
+          <table class="table">
           <thead class="scroll_head">
-            <tr align="center">
-
-              <th>관광지 및 맛집</th>
-
-              <th></th>
-
-            </tr>
+            <div>
+              <p style="font-weight: bold; text-align:center; margin-bottom:20px; font-size: 19px;">관광지 및 맛집　　　　</p></div>
           </thead>
           <tbody class="scroll_body" style="height:550px;">
           {% for i in tourist %}
@@ -1006,9 +1011,9 @@
 
                 <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#tour_info_{{forloop.counter0}}' ).trigger('click');">
                 <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span>
-                <span class="{{ i.cate }}-cross"></span><i></i>
+                <span class="{{ i.cate }}-cross"></span>
                 <p>add</p>
-                </a>
+                </a><i><img src="/static/img/cancel.png" style="padding:0%"></i>
                 <input type="checkbox" class="tour_info" id='tour_info_{{forloop.counter0}}' name="location" value="{{ i.t_name }}" data-cate="{{ i.cate }}"><label class="{{ i.cate }}" for="tour_info_'+i"></label>
                 </td>
             </tr>
@@ -1040,7 +1045,7 @@
     </div>
     </form>
   <h3 class="" style="margin-top: 15px">
-    <span class="place_subway" style="font-family: 'Jua', sans-serif; margin-left: 400px;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="font-family: 'Jua', sans-serif;">{{ station_pop.pop }}명</span> 입니다.
+    <span class="place_subway" style="color:hwb(39 16% 0%); font-weight: bold; margin-left: 230px;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="color:hwb(28 9% 0%) ;font-weight: bold;">{{ station_pop.pop }}명</span> 입니다.
   </h3>
 </div>
 
@@ -1049,7 +1054,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
-          <h3 class="" style="margin-top:15px; ">{{ year }}년 <span class="now_date" style="font-family: 'Jua', sans-serif;">{{ month }}월 {{ day }}일 {{ time }}시</span> 서울시 <span class="gu" style="font-family: 'Jua', sans-serif; ">{{gu}}</span>의 날씨 및 미세먼지 </h3>
+          <h3 class="" style="margin-top:15px; ">{{ year }}년 <span class="now_date" style="color:#11bbad;font-weight: bold;">{{ month }}월 {{ day }}일 {{ time }}시</span> 서울시 <span class="gu" style="color:#11bbad;font-weight: bold; ">{{gu}}</span>의 날씨 및 미세먼지 </h3>
         </div>
         <div class="col-md-4">
           <div class="row">

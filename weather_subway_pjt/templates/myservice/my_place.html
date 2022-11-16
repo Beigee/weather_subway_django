@@ -34,10 +34,10 @@
         transform: translate(-50%, -50%);
     }
 
-    .table-container{
+    .contents{
    -ms-overflow-style: none;
     }
-    .table-container::-webkit-scrollbar{
+    .contents::-webkit-scrollbar{
       display:none;
     }
 
@@ -145,8 +145,6 @@
 }
  .hidden-box {
 	 position: absolute;
-	 top: -9999px;
-	 left: -9999px;
 	 appearance: none;
 	 opacity: 0;
 }
@@ -285,9 +283,10 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
         </div>
       </div>
       <div class="row">
-{% for i in st %}
-        <div class="table-container" style=" height: 450px; overflow: scroll;">
-          <form method="get">
+      {% for i in st %}
+        <div class="table-container" >
+          <form method="post" action="/myservice/del/my_place/" id="{{i.station_name}}">
+            {% csrf_token %}
               <table>
               <thead>
                 <tr>
@@ -295,26 +294,29 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
                 </tr>
               </thead>
             </table>
-              {% for j in mp %}
+            <div class="contents" style= "height: 300px; overflow: scroll; background-color:rgb(250, 247, 247)">
+              <table>
+                {% for j in mp %}
                 {% if i.station_name == j.station_name %}
-            <ul class="list" style="width:97%" >
-              <li class="list-item" >
-                <input type="checkbox" class="hidden-box" name="del-loc" id="{{j.t_name}}_id" value="{{j.t_name}}">
-                <label for="{{j.t_name}}_id" class="check--label">
-                  <span class="check--label-box"></span>
-                  <span class="check--label-text">{{ j.t_name }}</span>
-                </label>
-              </li>
-            </ul>
-              {% endif %}
-          {% endfor %}
+                <ul class="list" style="width:98%"  >
+                  <li class="list-item" >
+                    <input type="checkbox" class="hidden-box " name="del-loc" data-idx="{{j.mp_idx}}" id="{{j.t_name}}_id" value="{{j.mp_idx}}">
+                    <label for="{{j.t_name}}_id" class="check--label">
+                      <span class="check--label-box"></span>
+                      <span class="check--label-text"> {% if j.cate == 'res' %} <img src="/static/img/res_icon.png" > {% else %} <img src="/static/img/tour_icon.png"> {% endif %} &nbsp;&nbsp;{{ j.t_name }}</span>
+
+                    </label>
+                  </li>
+                </ul>
+                {% endif %}
+            {% endfor %}
+              </table>
+          </div>
+             
             <div class="col-md-12">
               <div id="holder">
-                <button class="button" onclick="$('#{{i.station_name}}').trigger('Delete');">
-                  
-                  <input id="{{i.station_name}}" type="submit" style="display:none;" onclick='removeElement()'>
-
-                  
+                <button class="button submit_mp" id="{{i.station_name}}">
+                  <input id="{{내장소}}" type="submit" style="display:none;" onclick='removeElement()'>
                   <p class="btnText">Delete Place</p>   
                   <div class="btnTwo">
                   </div>
@@ -330,7 +332,7 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
 
         <div class="table-container">
           <div style="margin-top:13%; margin-left:12%; position:absolute;">
-            <a href=options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
+            <a href="/options/date_opt/"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
           </div>
         </div>
       </div>
@@ -356,7 +358,12 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
       ev.target.submit()
     })
 
-
+    document.querySelectorAll('.submit_mp').forEach(e => {
+      e.addEventListener('click', ev => {
+        console.dir(document.querySelector('.' + ev.target.id))
+        
+      })
+    })
 
   </script>
   {% endblock %}

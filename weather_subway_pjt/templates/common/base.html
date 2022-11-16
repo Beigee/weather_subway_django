@@ -43,13 +43,12 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar6">
-          <a class="navbar-brand text-primary d-none d-md-block">
-            <i class="fa fa-sun-o image"></i>
-            <b> BRAND</b>
+          <a class="navbar-brand text-primary d-none d-md-block" href="/">
+            <img src="{% static 'img/brandlogo.png' %}" width="150">
           </a>
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/">About Us</a></li>
+              <a class="nav-link"></a></li>
           </ul>
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
