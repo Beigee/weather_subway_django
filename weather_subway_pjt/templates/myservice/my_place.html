@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block style_code %}
-
   <style> /*table head*/
     table {
       width: 548px;
@@ -33,6 +32,13 @@
         top: 50%;
         left: 37%;
         transform: translate(-50%, -50%);
+    }
+
+    .table-container{
+   -ms-overflow-style: none;
+    }
+    .table-container::-webkit-scrollbar{
+      display:none;
     }
 
     a span {
@@ -252,7 +258,6 @@
   </style>
   {% endblock %}
 
-
   {% block script_code %}
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script> $('input[name=_selected_all_]').on('change', function(){
@@ -264,7 +269,6 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
 {% endblock %}
 
 {% block content %}
-
   <div class="py-5">
     <div class="container">
       <div class="row">
@@ -281,55 +285,78 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
         </div>
       </div>
       <div class="row">
-
-        <div class="table-container">
+{% for i in st %}
+        <div class="table-container" style=" height: 450px; overflow: scroll;">
           <form method="get">
-            <table>
+              <table>
               <thead>
                 <tr>
-
-                  <th>역 이름</th>
-
+                  <th>{{i.gu}} {{ i.station_name }}역</th>
                 </tr>
               </thead>
             </table>
-            <ul class="list">
-              <li class="list-item">
-                <input type="checkbox" class="hidden-box" name="del-loc" id="first" value="first">
-
-                <label for="first" class="check--label">
+              {% for j in mp %}
+                {% if i.station_name == j.station_name %}
+            <ul class="list" style="width:97%" >
+              <li class="list-item" >
+                <input type="checkbox" class="hidden-box" name="del-loc" id="{{j.t_name}}_id" value="{{j.t_name}}">
+                <label for="{{j.t_name}}_id" class="check--label">
                   <span class="check--label-box"></span>
-                  <span class="check--label-text">First Checkbox</span>
+                  <span class="check--label-text">{{ j.t_name }}</span>
                 </label>
               </li>
-
             </ul>
+              {% endif %}
+          {% endfor %}
             <div class="col-md-12">
               <div id="holder">
-                <button class="button" onclick="$('#내장소').trigger('click');">
-                  <input id="내장소" type="submit" style="display:none;">
-                  <p class="btnText">Delete Place</p>
+                <button class="button" onclick="$('#{{i.station_name}}').trigger('Delete');">
+                  
+                  <input id="{{i.station_name}}" type="submit" style="display:none;" onclick='removeElement()'>
+
+                  
+                  <p class="btnText">Delete Place</p>   
                   <div class="btnTwo">
                   </div>
                   <p class="btnText2">X</p>
                 </button>
+                
               </div>
             </div>
           </form>
+
         </div>
+{% endfor %}
+
         <div class="table-container">
           <div style="margin-top:13%; margin-left:12%; position:absolute;">
-            <a href="options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
-
+            <a href=options/date_opt"><span data-attr="ADD" style="font-size:30px; text-transform: uppercase">ADD</span><span data-attr="More" style="font-size: 30px; text-transform: uppercase;"></span></a>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
   </div>
+  
+  <script>
+    elements = []  
 
+    myplace.addEventListener('submit', ev => {
+      ev.preventDefault()
+      document.querySelectorAll(".tour_info").forEach(e => {
+        if(e.checked){
+          elements.remove()
+          myplace.innerHTML += '<input type="hidden" name="location_cate" value="' + e.dataset.cate +'" />'
+        }
+      })
+
+      elements.forEach(e => {
+          document.querySelector('#' + e).checked = true;
+      })
+      
+      ev.target.submit()
+    })
+
+
+
+  </script>
   {% endblock %}
-

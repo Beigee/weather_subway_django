@@ -971,7 +971,8 @@
 {% endblock %}
 
 {% block content%}
-    <form method="get" action="/myservice/my_place">
+    <form method="post" action="/myservice/my_place_impl/" id="myplace">
+      {% csrf_token %}
 
       <input type="hidden" name="station" value="{{ station_pop.station }}"/>
       <input type="hidden" name="gu" value="{{ gu }}"/>
@@ -1001,14 +1002,14 @@
             <tr align="center">
                 <td>{{ i.t_name }}</td>
 
-                <td style="position:relative;width:200px;">
+                <td style="position:relative;width:200px;" class="wrap_tour_info">
 
-                <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#{{ i.t_name }}').trigger('click');">
-                <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span><span class="{{ i.cate }}-cross"></span><i></i>
+                <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#tour_info_{{forloop.counter0}}' ).trigger('click');">
+                <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span>
+                <span class="{{ i.cate }}-cross"></span><i></i>
                 <p>add</p>
-                </a><input type="checkbox" id="{{ i.t_name }}" name="location" value="{{ i.t_name }}"><label class="{{ i.cate }}" for="{{ i.t_name }}"></label>
-
-                <input type="hidden" name="{{ i.t_name }}" value="{{ i.cate }}" />
+                </a>
+                <input type="checkbox" class="tour_info" id='tour_info_{{forloop.counter0}}' name="location" value="{{ i.t_name }}" data-cate="{{ i.cate }}"><label class="{{ i.cate }}" for="tour_info_'+i"></label>
                 </td>
             </tr>
 
@@ -1075,7 +1076,7 @@
                   </thead>
                       <tbody>
                         <tr>
-                          <td><i class="fa fa-thermometer-quarter">&nbsp; 기온</i></td>
+                          <td><i class="fa fa-thermometer-quarter">&nbsp; 기온(℃)</i></td>
                           <td>{{ weather.tmp }}</td>
                         </tr>
                         <tr>
@@ -1089,15 +1090,15 @@
                           {% endif %}
                         </tr>
                         <tr>
-                          <td><i class="fa fa-tint"></i>&nbsp; 습도</td>
+                          <td><i class="fa fa-tint"></i>&nbsp; 습도(%)</td>
                           <td>{{ weather.humn }}</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-fa fa-paper-plane "></i>&nbsp; 풍향</td>
+                          <td><i class="fa fa-fa fa-paper-plane "></i>&nbsp; 풍향(16방위)</td>
                           <td>{{ weather.windd }}</td>
                         </tr>
                         <tr>
-                          <td><i class="fa fa-life-ring"></i>&nbsp; 풍속</td>
+                          <td><i class="fa fa-life-ring"></i>&nbsp; 풍속(m/s)</td>
                           <td>{{ weather.winds }}</td>
                         <tr>
                           <td><i class="fa fa-umbrella"></i>&nbsp; 강수량 (mm)</td>
@@ -1148,4 +1149,28 @@
       </div>
     </div>
   </div>
+
+  <script>
+    elements = []  
+
+    myplace.addEventListener('submit', ev => {
+      ev.preventDefault()
+      document.querySelectorAll(".tour_info").forEach(e => {
+        if(e.checked){
+          elements.push(e.id)
+          myplace.innerHTML += '<input type="hidden" name="location_cate" value="' + e.dataset.cate +'" />'
+        }
+      })
+
+      elements.forEach(e => {
+          document.querySelector('#' + e).checked = true;
+      })
+      
+      ev.target.submit()
+    })
+
+
+
+  </script>
+
 {% endblock %}
