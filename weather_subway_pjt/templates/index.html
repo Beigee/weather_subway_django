@@ -2,11 +2,118 @@
 {% load static %}
 
 {% block style_code %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<style>
+p{
+    text-align: center ;
+    line-height: 31px;
+    margin-top: 3%;
+font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size : 20px;
+
+}
+
+h1{
+font-family: 'IBM Plex Sans KR', sans-serif;
+
+
+}
+h2{
+    margin-top:3%;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    text-align: center;
+
+}
+h3{
+
+font-family: 'IBM Plex Sans KR', sans-serif;}
+
+h5{
+    color: rgba(128, 128, 128, 0.5);
+}
+li{
+    color: rgba(128, 128, 128, 0.38);
+    font-weight: 425;
+
+}
+.btn:hover {
+    background: rgba(0, 128, 0, 0.31);
+}
+.nav-item:hover {
+    background: rgba(128, 128, 128, 0.26);
+}
+html {
+  scroll-behavior: smooth;
+}
+</style>
+
 {% endblock %}
 
 {% block content %}
-  <div class="container"></div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+  <div class="container" >
+    <!-- header 영역 -->
+    <header></header>
+  </div>
+      <div class="py-5 text-center text-white h-100 align-items-center d-flex" style="background:url('/static/img/seoul.jpg') no-repeat center;
+      background-position: center center, center center;
+      background-size:700px;margin-left: 0%">
+    <div class="container py-5">
+      <div class="row">
+        <div class="mx-auto col-lg-8 col-md-10">
+            <div class="title_menu " style="position:absolute;">
+              <a href="#STOP"
+                class="btn btn-outline-primary title_button1"
+                id="title_About_us"
+                style="height:200px;
+                        width:200px;
+                        text-align: center;
+                        line-height:195px;
+                        font-weight:500;
+                        font-size: 30px;
+                        text-shadow: 2px 2px 6px dimgray;
+                        color:navy;
+                        border:4px solid rgba(128,128,128,0.37);
+                        border-radius: 15px;
+                        margin-top:55%;
+                        margin-left: 160px;
+                        box-shadow: rgba(103,113,119,0.42) 2px 4px 2px 2px ;
+                        "
+                >About us</a>
+
+              <a
+                href="options/date_opt"
+                class="btn btn-outline-primary title_button2"
+                style="height:200px;
+                       width:200px;
+                       text-align: center;
+                       line-height:195px;
+                       font-weight:500;
+                       font-size: 30px;
+                       text-shadow: 2px 2px 6px dimgray;
+                       color:navy;
+
+                       border:4px solid rgba(128,128,128,0.37);
+                       border-radius: 15px;
+                        display:inline-block;
+                        margin-top:55%;
+                        margin-left:4px;
+                        box-shadow: rgba(103,113,119,0.42) 2px 4px 2px 2px "
+
+                >Weather</a></div>
+            <p class="lead mb-5" style="">
+            <p style="margin-top:30%;
+            margin-left:-2%;
+            color:white;
+            text-shadow: 1px 1px 3px dimgray;
+            font-size:38px;" >머신러닝 기반 관광지 맛집 추천 서비스</p></p>
+        </div>
+      </div>
+    </div>
+    </div>
     <div
       class="btn_group"
       draggable="true"
@@ -14,123 +121,110 @@
         background-size: 100%;
         background-position: center;
         margin-bottom: 500px;
-        background-repeat: no-repeat;">
-      <div class="container title">
-        <div class="row">
-          <div class="title bg-white p-10 my-100 col-md-10">
-            <h3 class="display-3" style="font-family: Noto Sans KR, sans-serif;">관광지 맛집 추천리스트</h3>
-            <div class="title_menu">
-              <a
-                href="#STOP"
-                class="btn btn-outline-primary h-10 title_button1"
-                id="title_About_us" style="font-family: Noto Sans KR, sans-serif;"
-                >About us</a
-              ><a
-                href="options/date_opt"
-                class="btn btn-outline-primary title_button2" style="font-family: Noto Sans KR, sans-serif;"
-                >&nbsp; &nbsp;Weather&nbsp; &nbsp; &nbsp;</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
+        background-repeat: no-repeat;
+      "
+    >
     </div>
-    <div class="table1">
-      <div class="container">
+
+    <div class="table1" >
+
+      <div class="container" >
         <div class="row">
-          <div class="col-md-12 text-center">
-            <div id="STOP">
-              <h1 style="font-family: Jua, sans-serif; margin-bottom: 50px;">About us</h1>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-4">
-                <h2 class="" style="font-weight: bold;">서비스 기획 배경</h2>
+{#            <div style="width:1000px; height:100px;#}
+{#            background: url('/static/img/weather.png') no-repeat center;#}
+{#            background-size:900px;#}
+{#            margin-left:8%;#}
+{#            margin-top:-25%;#}
+{#            display:block;#}
+{#            z-index: 10"></div>#}
+{#            <div style="width:1000px; height:100px;#}
+{#            background: url('/static/img/weather_main2.png') no-repeat center;#}
+{#            background-size:900px;#}
+{#            margin-left:8%;#}
+{#            margin-top:-15%;#}
+{#            display:block;#}
+{#            z-index: 10"></div>#}
+{#            <div style="width:1000px; height:100px;#}
+{#            background: url('/static/img/weather_main3.png') no-repeat center;#}
+{#            background-size:900px;#}
+{#            margin-left:8%;#}
+{#            margin-top:-5%;#}
+{#            display:block;#}
+{#            z-index: 10"></div>#}
+          <div class="col-md-12 text-center" >
+              <div style="width:1000px;
+              height:600px;
+              border: 3px solid #eee;
+              margin-left:7%;
+              margin-top:5%;
+              background: white;
+              box-shadow: darkgrey 6px 6px 10px 4px">
+              <div id="STOP" style="margin-top:30px;">
+                <h1 style="font-size:70px;
+                font-weight: 400;
+                color:navy;
+                text-shadow: honeydew 2px 2px 3px;" >About us</h1>
+                </div>
+                  <div class="py-5" style="margin-top:-7%;">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-12" style="border:rgba(17,187,173,0.29) 2px solid;width:900px;">
+                          <ul class="nav nav-tabs">
+                            <li class="nav-item" > <a href="" class="active nav-link" data-toggle="tab" data-target="#tabone">서비스 기획 의도</a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="" data-toggle="tab" data-target="#tabtwo">기대 효과</a> </li>
+                            <li class="nav-item"> <a href="" class="nav-link" data-toggle="tab" data-target="#tabthree">서비스 기능</a> </li>
+                            <li class="nav-item"> <a href="" class="nav-link" data-toggle="tab" data-target="#tabfour">데이터</a> </li>
+                          </ul>
+                          <div class="tab-content mt-2">
+                            <div class="tab-pane fade show active" id="tabone" role="tabpanel">
+                              <p class="">개인의 성향, 상황, 사회 현상에 따라 유동인구가 많거나 적은 장소를 추천하기 위해 </p>
+                            </div>
+                            <div class="tab-pane fade" id="tabtwo" role="tabpanel">
+                              <p class=""><p>"코로나 19 여파로 정체되어있던 서울시내 관광지 및 맛집 활셩화"</p><p>"지하철 역별 혼잡도와 날씨를 예측하여 소비자에게 선택지를 제공"</p></p>
+                            </div>
+                            <div class="tab-pane fade" id="tabthree" role="tabpanel">
+                              <p class="">날짜 선택, 시간 선택, 자치구 선택 -> 기상예보와 미세먼지예보, 지하철 역벌 유동인구 확인 후 가고싶은 역 선택 -> 해당 역의 관광지 및 맛집 선택 후 My place에 저장</p>
+                            </div>
+                              <div class="tab-pane fade" id="tabfour" role="tabpanel">
+                                <div class="py-3 text-center" >
+                                    <div class="container">
+                                      <div class="row">
+
+                                      </div>
+                                      <div class="row justify-content-center">
+                                        <div class="col-md-4 p-4"> <i class="d-block fa fa-circle fa-3x mb-2 text-muted"></i>
+                                          <h4> <b>날씨 및 대기환경 데이터</b> </h4>
+                                          <p style="font-size: 16px;">1. 기상청 종관 기상관측(ASOS)</p>
+                                          <p style="font-size: 16px;">2. 서울시 권역별 대기환경현황</p>
+                                          <p style="font-size: 16px;">3. 에어코리아 대기환경정보</p>
+                                        </div>
+                                        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-stop-circle-o fa-3x mb-2 text-muted"></i>
+                                          <h4> <b>지하철 유동인구 데이터</b> </h4>
+                                          <p style="font-size: 16px;">1. 서울교통공사 1~8호선</p>
+                                          <p style="font-size: 16px;">   - 날짜시간대별 데이터</p>
+                                          <p style="font-size: 16px;">2. 공공데이터포털 역주소 및 좌표</p>
+                                          <p style="font-size: 16px;">3. 공공데이터포털 행정구 정보</p>
+                                        </div>
+                                        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-circle-o fa-3x mb-2 text-muted"></i>
+                                          <h4> <b>관광지 및 맛집 데이터</b> </h4>
+                                          <p style="font-size: 16px;">1. 한국관광데이터랩</p>
+                                          <p style="font-size: 16px;">   - 관광지 및 맛집 정보</p>
+                                          <p style="font-size: 16px;">2. 네이버지도 관광지 근처 역정보</p>
+                                          <p style="font-size: 16px;">3. 카카오 api 좌표정보</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
-              <div class="col-md-4">
-                <h2 class="" style="font-weight: bold;">기대 효과</h2>
-              </div>
-              <div class="col-md-4">
-                <h2 class="" contenteditable="true" style="font-weight: bold;">프로젝트 구성원</h2>
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="row" style="font-family: Noto Sans KR, sans-serif;">
-          <div class="col-md-4 p-3 shadow-lg">
-            <p>1.사회적 거리두기가 해제되면서 관광객증가</p>
-            <p>- 관광객의 선택에 날씨 기후는 중요한 요소</p>
-            <p>2.코로나로 감염불안감이 대두됨에 따라</p>
-            <p>안전에 대한 관심도 증가</p>
-            <p>- 혼잡하지 않은 장소 선호</p>
-          </div>
-          <div class="col-md-4 p-3 shadow-lg">
-            <p>1. 관광객 분산 유도</p>
-            <p>2. 감염불안감 해소 가능</p>
-            <p>3. 효율적 관광정보 서비스 제공</p>
-          </div>
-          <div class="col-md-4 p-3 shadow-lg">
-            <p>DS 박준수(팀장)</p>
-            <p>DS 김태현</p>
-            <p>DS 이중훈</p>
-            <p>DE 홍효정(파트장)</p>
-            <p>DE 김민석</p>
-            <p>DE 유승종</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="end_table">
-      <div class="container">
-        <div class="row" style="font-family: Noto Sans KR, sans-serif;">
-          <div class="col-lg-3 col-6 p-3">
-            <h5><b>5조</b></h5>
-            <ul class="list-unstyled">
-              <li>그래서 언제 떠나조?</li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-6 p-3">
-            <h5><b>대표 번호</b></h5>
-            <ul class="list-unstyled">
-              <li>010 - 1234 - 5678</li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 p-3">
-            <h5><b>기획 의도</b></h5>
-            <ul class="list-unstyled">
-              <li>
-                코로나 여파로 정체되어있었던 서울 시내 관광지 및 맛집 활성화
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 p-3">
-            <h5>타겟층</h5>
-            <ul class="list-unstyled">
-              <li>혼잡한 지역을 피하고자 하는분</li>
-              <li>반대로 인기있는 지역을 찾는분</li>
-            </ul>
-          </div>
-          <div
-            class="col-md-12 d-flex align-items-center justify-content-between my-2"
-          >
-            <i
-              class="d-block fa fa-facebook-official text-muted fa-lg mr-2"
-            ></i>
-            <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
-            <i
-              class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"
-            ></i>
-            <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
-            <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
-            <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="end_end">
+    <div class="end_table" style="margin-left: 40%;margin-top:5%;color:rgba(128,128,128,0.7);">
+    <div>
       <div class="col-md-12 text-center">
         <p class="mb-0 mt-2">© production date :2022. 11.</p>
       </div>
@@ -138,10 +232,12 @@
     <div class="py-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 button_bottom">
+          <div class="col-md-12 button_bottom" style="margin-left: 30%;">
             <a href="#" class="btn btn-primary">맨위로</a>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
 {% endblock %}

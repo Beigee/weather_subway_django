@@ -37,10 +37,12 @@
     }
 /*관광지 버튼 CSS*/
 .tour {
+
       width: 112px;
       height: 23px;
       cursor: pointer;
       position: absolute;
+
       font-family: "Roboto";
       text-transform: uppercase;
       color: orange;
@@ -325,7 +327,7 @@
     transition-delay: .1s;
 }
 
-.more-tour:hover .tour-sfl, .more-tour. .tour-sfl {
+.more-tour:hover .tour-sfl, .more-tour .tour-sfl {
     -webkit-transition: .5s;
     transition: .5s;
 }
@@ -781,7 +783,7 @@
     transition-duration: .6s;
 }
 /*관광지 버튼-checked CSS*/
-  input[type=checkbox] + .tour {display:none;}
+    input[type=checkbox] + .tour {display:none;}
     input[type=checkbox]:checked + .tour {
     position:absolute;
     background:url("/static/img/noname.png") center no-repeat;
@@ -903,6 +905,7 @@
 		 justify-self: center;
 	}
 
+
   </style>
 
 {% endblock %}
@@ -968,7 +971,9 @@
 {% endblock %}
 
 {% block content%}
-    <form method="get" action="/myservice/my_place">
+    <form method="post" action="/myservice/my_place_impl/" id="myplace">
+      {% csrf_token %}
+
       <input type="hidden" name="station" value="{{ station_pop.station }}"/>
       <input type="hidden" name="gu" value="{{ gu }}"/>
 
@@ -997,13 +1002,13 @@
             <tr align="center">
                 <td>{{ i.t_name }}</td>
 
-                <td style="position:relative;width:200px;">
+                <td style="position:relative;width:200px;" class="wrap_tour_info">
 
-                <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#{{ i.t_name }}').trigger('click');">
-                <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span><span class="{{ i.cate }}-cross"></span><i></i>
+                <a class="{{ i.cate }} more-{{ i.cate }}" onclick="$('#tour_info_{{forloop.counter0}}' ).trigger('click');">
+                <span class="{{ i.cate }}-fl"></span><span class="{{ i.cate }}-sfl"></span><span class="{{ i.cate }}-cross"></span>
                 <p>add</p>
-                </a><input type="checkbox" id="{{ i.t_name }}" name="location" value="{{ i.t_name }}"><label class="{{ i.cate }}" for="{{ i.t_name }}"></label>
-                <input type="hidden" name="{{ i.t_name }}" value="{{ i.cate }}" />
+                </a><i><img src="/static/img/cancel.png"></i>
+                <input type="checkbox" class="tour_info" id='tour_info_{{forloop.counter0}}' name="location" value="{{ i.t_name }}" data-cate="{{ i.cate }}"><label class="{{ i.cate }}" for="tour_info_'+i"></label>
                 </td>
             </tr>
 
@@ -1034,7 +1039,7 @@
     </div>
     </form>
   <h3 class="" style="margin-top: 15px">
-    <span class="place_subway" style="font-family: 'Jua', sans-serif; margin-left: 400px;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="font-family: 'Jua', sans-serif;">{{ station_pop.pop }}명</span> 입니다.
+    <span class="place_subway" style="font-family: 'Jua', sans-serif; margin-left: 400px; color: #00c73c;">{{ station_pop.station }}역</span>의 예상 유동인구는 <span class="plae_pop" style="font-family: 'Jua', sans-serif;">{{ station_pop.pop }}명</span> 입니다.
   </h3>
 </div>
 
@@ -1143,4 +1148,28 @@
       </div>
     </div>
   </div>
+
+  <script>
+    elements = []  
+
+    myplace.addEventListener('submit', ev => {
+      ev.preventDefault()
+      document.querySelectorAll(".tour_info").forEach(e => {
+        if(e.checked){
+          elements.push(e.id)
+          myplace.innerHTML += '<input type="hidden" name="location_cate" value="' + e.dataset.cate +'" />'
+        }
+      })
+
+      elements.forEach(e => {
+          document.querySelector('#' + e).checked = true;
+      })
+      
+      ev.target.submit()
+    })
+
+
+
+  </script>
+
 {% endblock %}
