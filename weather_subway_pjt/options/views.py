@@ -26,7 +26,7 @@ def subway_opt(request):
 	result = result.to_dict('ranking')
 	y = date.values[0][:4]
 	m = date.values[0][5:7]
-	d = date.values[0][9:10]
+	d = date.values[0][8:10]
 	pm10 = int(weather.PM10.iloc[0])
 	pm25 = int(weather.PM25.iloc[0])
 
