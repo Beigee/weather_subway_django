@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from options.models import Tourism
 from .models import MyPlace
 from django.contrib.auth.decorators import login_required
 
@@ -9,8 +9,9 @@ def my_place(request):
     list_mp = None
     list_st = None
     id = request.user.id
+
     if request.method == 'GET':
-        list_mp=MyPlace.objects.filter(user_id=id).distinct().values('station_name','t_name', 'mp_idx')
+        list_mp=MyPlace.objects.filter(user_id=id).distinct().values('station_name','t_name', 'mp_idx', 'cate')
         list_st=MyPlace.objects.filter(user_id=id).distinct().values('station_name','gu')
 
     else: 
@@ -31,14 +32,13 @@ def save_my_place(request):
         gu = request.POST['gu']
         location = request.POST.getlist('location')
         location_cate = request.POST.getlist('location_cate')
-        # print(location)
         id = request.user.id
         list_t=MyPlace.objects.filter(user_id=id).values('t_name')
         # # print(list_t)
         l=[]
         for i in range(len(list_t)):
             l.append(list(list_t[i].values())[0])
-        print(l)
+
 
         for i, name in enumerate(location):
             if len(location) != 0:

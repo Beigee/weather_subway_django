@@ -70,6 +70,6 @@ def place_opt(request):
 			i.update(cate='res')
 
 	for j in tour:
-		j['t_name']=j['t_name'].replace('/', '')
-	#tour['t_name'] = tour['t_name'].apply(lambda x: x.replace('/', ''))
-	return render(request, 'options/place_opt.html',{'tourist': tour, 'station_pop': res, 'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})
+		j['t_name']=j['t_name'].replace('/','')
+
+	return render(request, 'options/place_opt.html',{'tourist':tour,'station_pop':res,'weather': context, 'result': result, 'gu': gu, 'year': y, 'month': m, 'day': d, 'time': time})

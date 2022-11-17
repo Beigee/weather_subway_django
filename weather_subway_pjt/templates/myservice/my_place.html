@@ -303,7 +303,8 @@ var arr = $('input[name=_selected_]:checked').serializeArray().map(function(item
                     <input type="checkbox" class="hidden-box " name="del-loc" data-idx="{{j.mp_idx}}" id="{{j.t_name}}_id" value="{{j.mp_idx}}">
                     <label for="{{j.t_name}}_id" class="check--label">
                       <span class="check--label-box"></span>
-                      <span class="check--label-text">{{ j.t_name }}</span>
+                      <span class="check--label-text"> {% if j.cate == 'res' %} <img src="/static/img/res_icon.png" > {% else %} <img src="/static/img/tour_icon.png"> {% endif %} &nbsp;&nbsp;{{ j.t_name }}</span>
+
                     </label>
                   </li>
                 </ul>
