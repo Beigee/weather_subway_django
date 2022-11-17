@@ -11,7 +11,7 @@ def date_opt(request):
 
 @login_required(login_url='accounts:log_in')
 def subway_opt(request):
-	global context, result, gu, y, m, d, time
+	global context, result, gu,y, m, d, time
 	day = request.GET['day']
 	time = request.GET['time']
 	gu = request.GET['gu']
@@ -60,9 +60,9 @@ def subway_opt(request):
 @login_required(login_url='accounts:log_in')
 def place_opt(request):
 	station = request.GET['station']
-	pop = request.GET['pop']
-	res = {'station':station, 'pop':pop}
-	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address', 'cate', 'lat', 'lon')
+	pop=request.GET['pop']
+	res={'station':station,'pop':pop}
+	tour = Tourism.objects.filter(station_name=station).values('station_name', 't_name', 'address','cate','lat', 'lon')
 	for i in tour:
 		if i['cate'] == '관광지':
 			i.update(cate='tour')
